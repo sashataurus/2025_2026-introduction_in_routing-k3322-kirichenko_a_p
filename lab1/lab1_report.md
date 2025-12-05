@@ -28,20 +28,80 @@
 
 ## Подготовка к лабораторной работе
 
-У меня Мас с процессором Apple Silicon, поэтому у меня возникли трудности и я выполняла работу на Ubuntu на UTM.
+У меня Мас с процессором Apple Silicon, поэтому у меня возникли трудности - не получилось выполнить работу на Ubuntu на UTM, посколько там невозможна вложеннная виртуализация. В итоге пришлось обратиться за помощью к одногруппнику и попросить его компьютер на Windows.
 
-Для начала нужно было установить Docker, и в конфигурации lxc контейнера включить security.nesting.
-
-<img width="2206" height="404" alt="telegram-cloud-document-2-5289549823307978141" src="https://github.com/user-attachments/assets/6960dc85-b3dc-46a8-ae45-e32fd0890c4c" />
+Для начала нужно было установить Docker, и в конфигурации `lxc` контейнера включить `security.nesting`.
 
 Затем нужно установить `make`, склонировать `hellt/vrnetlab`, перейти в папку `routeros`, загрузить в эту папку `chr-6.47.9.vmdk` и с помощью `make docker-image` собрать образ.
 
-<img width="1304" height="218" alt="telegram-cloud-document-2-5289549823307978286" src="https://github.com/user-attachments/assets/1055a59c-368a-44f5-be0d-89f92b0178ad" />
-
-Затем установим ContainerLab.
-
-<img width="1872" height="798" alt="telegram-cloud-document-2-5289549823307978312" src="https://github.com/user-attachments/assets/8d5139cb-fe0f-42bd-8fb4-86e4cbcf42c0" />
+Затем установим ContainerLab с помощью команды `bash -c "$(curl -sL https://get.containerlab.dev)"`.
 
 ## Схема сети
 
 <img width="828" height="613" alt="image" src="https://github.com/user-attachments/assets/dea19192-ebc4-43a1-828d-a2a96c54d1f8" />
+
+## Сеть управления
+
+Я создала файл `lab1.clab.yaml`, в котором была создана базовая топология и задана сеть управления:
+
+```
+name: lab1
+
+mgmt:
+  network: custom-mgmt
+  ipv4-subnet: 172.31.0.0/24
+
+topology:
+  kinds:
+    vr-ros:
+      image: vrnetlab/mikrotik_routeros:6.47.9
+
+  nodes:
+    R01.TEST:
+      kind: vr-ros
+      mgmt-ipv4: 172.31.0.10
+
+    SW01.L3.01.TEST:
+      kind: vr-ros
+      mgmt-ipv4: 172.31.0.11
+
+    SW02.L3.01.TEST:
+      kind: vr-ros
+      mgmt-ipv4: 172.31.0.12
+
+    SW02.L3.02.TEST:
+      kind: vr-ros
+      mgmt-ipv4: 172.31.0.13
+
+    PC1:
+      kind: linux
+      image: ubuntu:latest
+      mgmt-ipv4: 172.31.0.2
+
+    PC2:
+      kind: linux
+      image: ubuntu:latest
+      mgmt-ipv4: 172.31.0.3
+
+  links:
+    - endpoints: ["R01.TEST:eth1", "SW01.L3.01.TEST:eth1"]
+    - endpoints: ["SW01.L3.01.TEST:eth2", "SW02.L3.01.TEST:eth1"]
+    - endpoints: ["SW01.L3.01.TEST:eth3", "SW02.L3.02.TEST:eth1"]
+    - endpoints: ["SW02.L3.01.TEST:eth2", "PC1:eth1"]
+    - endpoints: ["SW02.L3.02.TEST:eth2", "PC2:eth1"]
+```
+Затем деплоим с помощью команды `clab deploy -t lab1.clab.yaml`:
+
+<img width="813" height="354" alt="image" src="https://github.com/user-attachments/assets/bc624a5b-2ba1-4dd7-b0bf-f6f65578ab19" />
+
+Строим граф топологии с помощью команды `clab graph -t lab1.clab.yaml`:
+
+<img width="455" height="408" alt="image" src="https://github.com/user-attachments/assets/89cec55a-815d-46e6-bb58-7f0c6fa9e78a" />
+
+## Написание конфигов
+
+### Роутер R01
+
+
+
+
