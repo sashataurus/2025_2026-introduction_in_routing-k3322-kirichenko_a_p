@@ -92,7 +92,7 @@ topology:
 ```
 Затем деплоим с помощью команды `clab deploy -t lab1.clab.yaml`:
 
-<img width="813" height="354" alt="image" src="https://github.com/user-attachments/assets/bc624a5b-2ba1-4dd7-b0bf-f6f65578ab19" />
+<img width="1036" height="461" alt="image_2025-12-05_21-49-17" src="https://github.com/user-attachments/assets/1d68997b-f575-4d2d-b451-d7f7eb711e99" />
 
 Строим граф топологии с помощью команды `clab graph -t lab1.clab.yaml`:
 
