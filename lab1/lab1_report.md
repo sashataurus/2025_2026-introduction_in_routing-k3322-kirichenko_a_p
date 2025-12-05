@@ -38,7 +38,7 @@
 
 ## Схема сети
 
-<img width="542" height="557" alt="image" src="https://github.com/user-attachments/assets/dc74a49c-8728-41c5-955e-6b0ee9e28eec" />
+<img width="682" height="502" alt="image" src="https://github.com/user-attachments/assets/beea87c6-e0fe-4b26-812e-90c20146628f" />
 
 ## Сеть управления
 
