@@ -38,7 +38,7 @@
 
 ## Схема сети
 
-<img width="828" height="613" alt="image" src="https://github.com/user-attachments/assets/dea19192-ebc4-43a1-828d-a2a96c54d1f8" />
+<img width="542" height="557" alt="image" src="https://github.com/user-attachments/assets/dc74a49c-8728-41c5-955e-6b0ee9e28eec" />
 
 ## Сеть управления
 
@@ -102,6 +102,97 @@ topology:
 
 ### Роутер R01
 
+Настроиваем сначала роутер - сздаем 2 VLAN'а на `ether2` (важно, что `Ether1` выделяется под `ether0`, поэтому начинаем брать интерфейсы с `ether2`). Затем задаем ip адрес и пул адресов внутри каждого VLAN и настраиваем DHCP сервера, а также настраиваем имена устройств, меняем логины и пароли:
 
+```
+/interface vlan
+add name=vlan10 vlan-id=10 interface=ether2
+add name=vlan20 vlan-id=20 interface=ether2
+/ip address
+add address=10.10.0.1/24 interface=vlan10
+add address=10.20.0.1/24 interface=vlan20
+/ip pool
+add name=pool10 ranges=10.10.0.10-10.10.0.254
+add name=pool20 ranges=10.20.0.10-10.20.0.254
+/ip dhcp-server
+add address-pool=pool10 disabled=no interface=vlan10 name=dhcp-server10
+add address-pool=pool20 disabled=no interface=vlan20 name=dhcp-server20
+/ip dhcp-server network
+add address=10.10.0.0/24 gateway=10.10.0.1
+add address=10.20.0.0/24 gateway=10.20.0.1
+/user
+add name=fe0fanov password=1234 group=full
+remove admin
+/system identity
+set name=R01
+```
 
+### Свитч SW01
 
+Настраиваем первый свитч. Так как через него идут 2 VLAN'а, то необходимо фильтровать пакеты. Делается это с помощью мостов. Настраиваем интерфейс моста, включаем `vlan-filtering` и указываем имя моста для каждого VLAN. Затем указываем все порты устройства. Далее указываем id VLAN и в `tagged` сам мост и trunk-порты. Далее настраиваем ip, имя устройства, логин и пароль.
+
+```
+/interface bridge
+add name=bridge1 vlan-filtering=yes
+/interface vlan
+add name=vlan10 vlan-id=10 interface=bridge1
+add name=vlan20 vlan-id=20 interface=bridge1
+/interface bridge port
+add bridge=bridge1 interface=ether2
+add bridge=bridge1 interface=ether3
+add bridge=bridge1 interface=ether4
+/interface bridge vlan
+add bridge=bridge1 tagged=bridge1,ether2,ether3 vlan-ids=10
+add bridge=bridge1 tagged=bridge1,ether2,ether4 vlan-ids=20
+/ip address
+add address=10.10.0.2/24 interface=vlan10
+add address=10.20.0.2/24 interface=vlan20
+/user
+add name=fe0fanov password=1234 group=full
+remove admin
+/system identity
+set name=SW01
+```
+
+### Свитчи SW02.01 и SW02.02
+
+Рассмотрим на примере SW02.01. Настраиваем интерфейс моста и VLAN, порты. ЗатемнНастраиваем trunk- и access-порты (`tagged` для trunk, `untagged` для access) и указываем id VLAN. Настраиваем ip, имя, логин и пароль.
+
+```
+/interface bridge
+add name=bridge1
+/interface vlan
+add name=vlan10 vlan-id=10 interface=bridge1
+/interface bridge port
+add bridge=bridge1 interface=ether2
+add bridge=bridge1 interface=ether3 pvid=10
+/interface bridge vlan
+add bridge=bridge1 tagged=bridge1,ether2 untagged=ether3 vlan-ids=10
+/ip address
+add address=10.10.0.3/24 interface=vlan10
+/user
+add name=fe0fanov password=1234 group=full
+remove admin
+/system identity
+set name=SW02-01
+```
+
+### Компьютеры PC1 и PC2
+
+Компьютеры я решила настроить вручную - зайти в каждый ПК, установить необходимые утилиты (настраиваем VLAN и запрашиваем ip у сервера) и затем настроить. 
+
+```
+#!/bin/sh
+ip link add link eth1 name vlan10 type vlan id 10
+ip link set vlan10 up
+udhcpc -i vlan10
+ip route add 10.20.0.0/24 via 10.10.0.1 dev vlan10
+```
+
+## Ping
+
+Заходим внутрь роутера через команду `ssh username@clab-lab1-R01.TEST` и проверяем работоспособность системы:
+
+## Вывод
+
+В ходе работы были создана трёхуровневая сеть для классического предприятия. Все устройства успешно соединены, были настроены 2 VLAN'а и DHCP-серверы внутри них для раздачи ip компьютерам.
