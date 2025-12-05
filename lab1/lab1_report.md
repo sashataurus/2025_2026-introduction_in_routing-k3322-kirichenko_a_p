@@ -75,12 +75,12 @@ topology:
 
     PC1:
       kind: linux
-      image: ubuntu:latest
+      image: alpine:latest
       mgmt-ipv4: 172.31.0.2
 
     PC2:
       kind: linux
-      image: ubuntu:latest
+      image: alpine:latest
       mgmt-ipv4: 172.31.0.3
 
   links:
