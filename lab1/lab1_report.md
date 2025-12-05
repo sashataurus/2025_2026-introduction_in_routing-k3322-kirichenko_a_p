@@ -49,7 +49,7 @@ name: lab1
 
 mgmt:
   network: custom-mgmt
-  ipv4-subnet: 172.31.0.0/24
+  ipv4-subnet: 172.16.16.0/24
 
 topology:
   kinds:
@@ -59,29 +59,29 @@ topology:
   nodes:
     R01.TEST:
       kind: vr-ros
-      mgmt-ipv4: 172.31.0.10
+      mgmt-ipv4: 172.16.16.100
 
     SW01.L3.01.TEST:
       kind: vr-ros
-      mgmt-ipv4: 172.31.0.11
+      mgmt-ipv4: 172.16.16.101
 
     SW02.L3.01.TEST:
       kind: vr-ros
-      mgmt-ipv4: 172.31.0.12
+      mgmt-ipv4: 172.16.16.102
 
     SW02.L3.02.TEST:
       kind: vr-ros
-      mgmt-ipv4: 172.31.0.13
+      mgmt-ipv4: 172.16.16.103
 
     PC1:
       kind: linux
       image: alpine:latest
-      mgmt-ipv4: 172.31.0.2
+      mgmt-ipv4: 172.16.16.2
 
     PC2:
       kind: linux
       image: alpine:latest
-      mgmt-ipv4: 172.31.0.3
+      mgmt-ipv4: 172.16.16.3
 
   links:
     - endpoints: ["R01.TEST:eth1", "SW01.L3.01.TEST:eth1"]
@@ -192,6 +192,11 @@ ip route add 10.20.0.0/24 via 10.10.0.1 dev vlan10
 ## Ping
 
 Заходим внутрь роутера через команду `ssh username@clab-lab1-R01.TEST` и проверяем работоспособность системы:
+
+<img width="740" height="617" alt="image_2025-12-05_21-50-43" src="https://github.com/user-attachments/assets/cd56624f-977c-4f97-9509-7ae105f66fd5" />
+
+<img width="601" height="203" alt="image_2025-12-05_21-53-02" src="https://github.com/user-attachments/assets/64522755-3b9e-425e-b485-044096a185d4" />
+
 
 ## Вывод
 
