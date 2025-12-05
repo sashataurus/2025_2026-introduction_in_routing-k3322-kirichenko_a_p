@@ -121,7 +121,7 @@ add address-pool=pool20 disabled=no interface=vlan20 name=dhcp-server20
 add address=10.10.0.0/24 gateway=10.10.0.1
 add address=10.20.0.0/24 gateway=10.20.0.1
 /user
-add name=fe0fanov password=1234 group=full
+add name=sasha password=1234 group=full
 remove admin
 /system identity
 set name=R01
@@ -148,7 +148,7 @@ add bridge=bridge1 tagged=bridge1,ether2,ether4 vlan-ids=20
 add address=10.10.0.2/24 interface=vlan10
 add address=10.20.0.2/24 interface=vlan20
 /user
-add name=fe0fanov password=1234 group=full
+add name=sasha password=1234 group=full
 remove admin
 /system identity
 set name=SW01
@@ -171,7 +171,7 @@ add bridge=bridge1 tagged=bridge1,ether2 untagged=ether3 vlan-ids=10
 /ip address
 add address=10.10.0.3/24 interface=vlan10
 /user
-add name=fe0fanov password=1234 group=full
+add name=sasha password=1234 group=full
 remove admin
 /system identity
 set name=SW02-01
