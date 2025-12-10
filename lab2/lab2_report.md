@@ -23,3 +23,129 @@
 
 ## Схема сети
 
+<img width="898" height="755" alt="image" src="https://github.com/user-attachments/assets/9fac3512-17ef-4097-bac2-dbc73998725d" />
+
+## Сеть управления
+
+Я создала файл `lab2.clab.yaml`, в котором была создана базовая топология и задана сеть управления:
+
+```
+name: lab2
+mgmt:
+  network: custom_mgmt
+  ipv4-subnet: 10.20.30.0/24
+
+topology:
+  kinds:
+    vr-ros:
+      image: vrnetlab/mikrotik_routeros:6.47.9
+
+  nodes:
+    R01.BRL:
+      kind: vr-ros
+      mgmt-ipv4: 10.20.30.103
+      startup-config: config/r01-brl.rsc
+    R01.FRT:
+      kind: vr-ros
+      mgmt-ipv4: 10.20.30.102
+      startup-config: config/r01-frt.rsc
+    R01.MSK:
+      kind: vr-ros
+      mgmt-ipv4: 10.20.30.101
+      startup-config: config/r01-msk.rsc
+    PC1:
+      kind: linux
+      image: alpine:latest
+      mgmt-ipv4: 10.20.30.2
+      binds:
+        - ./config:/config
+      exec:
+        - sh /config/pc1.sh
+    PC2:
+      kind: linux
+      image: alpine:latest
+      mgmt-ipv4: 10.20.30.3
+      binds:
+        - ./config:/config
+      exec:
+        - sh /config/pc2.sh
+    PC3:
+      kind: linux
+      image: alpine:latest
+      mgmt-ipv4: 10.20.30.4
+      binds:
+        - ./config:/config
+      exec:
+        - sh /config/pc3.sh
+
+  links:
+    - endpoints: ["R01.BRL:eth1","R01.MSK:eth2"]
+    - endpoints: ["R01.BRL:eth2","R01.FRT:eth1"]
+    - endpoints: ["R01.MSK:eth1","R01.FRT:eth2"]
+    - endpoints: ["R01.BRL:eth3","PC3:eth1"]
+    - endpoints: ["R01.FRT:eth3","PC2:eth1"]
+    - endpoints: ["R01.MSK:eth3","PC1:eth1"]
+```
+
+Затем деплоим с помощью команды `clab deploy -t lab2.clab.yaml`:
+
+скрин
+
+Строим граф топологии с помощью команды `clab graph -t lab2.clab.yaml`:
+
+скрин
+
+## Написание конфигов
+
+### Роутеры R01
+
+Прописываем статические руты. DHCP аналогичен R01 из предыдущей работы.
+
+```
+/ip address
+add address=10.10.11.1/30 interface=ether2
+add address=10.10.13.2/30 interface=ether3
+add address=10.1.0.1/16 interface=ether4
+
+/ip pool
+add name=dhcp-pool ranges=10.1.0.10-10.1.255.254
+
+/ip dhcp-server
+add address-pool=dhcp-pool disabled=no interface=ether4 name=dhcp-server
+
+/ip dhcp-server network
+add address=10.1.0.0/16 gateway=10.1.0.1
+
+/ip route
+add distance=1 dst-address=10.2.0.0/16 gateway=10.10.11.2
+add distance=1 dst-address=10.3.0.0/16 gateway=10.10.13.1
+
+/user
+add name=sasha password=1234 group=full
+remove admin
+
+/system identity
+set name=R01.MSK
+```
+
+### Компьютеры PC
+
+IP-адреса выдаются компьютерам через DHCP, но в Containerlab у них выставляется дефолтный маршрут от сети управления в yaml-конфиге, из-за чего попытки послать запрос на передаются на роутер моего провайдера, где этот запрос теряется. Поэтому необходимо удалить этот маршрут.
+
+```
+ip route del default via 10.20.30.1 dev eth0
+udhcpc -i eth1
+```
+
+## Соединения
+
+### Роутеры R01
+
+### Компьютеры PC
+
+## Вывод
+
+В ходе работы были созданы:
+- все необходимые устройства, которые соединены через настройку IP-адресов на интерфейсах
+- DHCP-сервера для компьютеров
+- настроена статическая маршрутизация
