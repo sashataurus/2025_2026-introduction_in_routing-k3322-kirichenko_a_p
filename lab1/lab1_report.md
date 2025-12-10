@@ -36,6 +36,8 @@
 
 Затем установим ContainerLab с помощью команды `bash -c "$(curl -sL https://get.containerlab.dev)"`.
 
+<img width="757" height="269" alt="image" src="https://github.com/user-attachments/assets/297bee77-4572-42c5-bef0-8ff0a2586e89" />
+
 ## Схема сети
 
 <img width="682" height="502" alt="image" src="https://github.com/user-attachments/assets/beea87c6-e0fe-4b26-812e-90c20146628f" />
