@@ -89,11 +89,11 @@ topology:
 
 Затем деплоим с помощью команды `clab deploy -t lab2.clab.yaml`:
 
-скрин
+<img width="865" height="461" alt="image" src="https://github.com/user-attachments/assets/b9af49ac-0880-431b-96fb-f60f88df8902" />
 
 Строим граф топологии с помощью команды `clab graph -t lab2.clab.yaml`:
 
-скрин
+<img width="931" height="571" alt="image" src="https://github.com/user-attachments/assets/f12db3fb-5277-4e13-93ee-37f086774d65" />
 
 ## Написание конфигов
 
@@ -133,6 +133,7 @@ set name=R01.MSK
 IP-адреса выдаются компьютерам через DHCP, но в Containerlab у них выставляется дефолтный маршрут от сети управления в yaml-конфиге, из-за чего попытки послать запрос на передаются на роутер моего провайдера, где этот запрос теряется. Поэтому необходимо удалить этот маршрут.
 
 ```
+#!/bin/sh
 ip route del default via 10.20.30.1 dev eth0
 udhcpc -i eth1
 ```
@@ -140,6 +141,12 @@ udhcpc -i eth1
 ## Соединения
 
 ### Роутеры R01
+
+<img width="960" height="628" alt="image" src="https://github.com/user-attachments/assets/654b9079-a38b-49cd-a9a3-1fea0d385308" />
+
+<img width="960" height="628" alt="image" src="https://github.com/user-attachments/assets/73896ae5-9016-4da8-a7bd-517bac2ebb14" />
+
+<img width="960" height="628" alt="image" src="https://github.com/user-attachments/assets/03796481-2eb0-41f9-8a06-9df6832e3574" />
 
 ### Компьютеры PC
 
