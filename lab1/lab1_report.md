@@ -197,6 +197,8 @@ ip route add 10.20.0.0/24 via 10.10.0.1 dev vlan10
 
 <img width="740" height="617" alt="image_2025-12-05_21-50-43" src="https://github.com/user-attachments/assets/cd56624f-977c-4f97-9509-7ae105f66fd5" />
 
+Выходим с помощью команды `quit`.
+
 <img width="601" height="203" alt="image_2025-12-05_21-53-02" src="https://github.com/user-attachments/assets/64522755-3b9e-425e-b485-044096a185d4" />
 
 
