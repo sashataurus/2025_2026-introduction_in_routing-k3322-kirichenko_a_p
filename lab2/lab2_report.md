@@ -148,6 +148,8 @@ udhcpc -i eth1
 
 <img width="960" height="628" alt="image" src="https://github.com/user-attachments/assets/03796481-2eb0-41f9-8a06-9df6832e3574" />
 
+Выходим с помощью команды `quit`.
+
 ### Компьютеры PC
 
 ## Вывод
