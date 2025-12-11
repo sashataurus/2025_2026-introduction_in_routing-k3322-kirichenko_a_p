@@ -154,6 +154,16 @@ udhcpc -i eth1
 
 ### Компьютеры PC
 
+Заходим с помощью команды `docker exec -it clab-lab2-PC1 sh`.
+
+<img width="586" height="511" alt="image" src="https://github.com/user-attachments/assets/0538af0b-f1a0-421f-9b0e-c2c434adf7b8" />
+
+<img width="586" height="511" alt="image" src="https://github.com/user-attachments/assets/f0824434-9439-4bc5-ad4e-36b1ccd61ff0" />
+
+<img width="586" height="511" alt="image" src="https://github.com/user-attachments/assets/269d2ad6-4293-46d9-987a-7af170429d77" />
+
+Выходим с помощью команды `exit`.
+
 ## Вывод
 
 В ходе работы были созданы:
