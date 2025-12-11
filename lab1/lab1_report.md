@@ -199,6 +199,8 @@ ip route add 10.20.0.0/24 via 10.10.0.1 dev vlan10
 
 Выходим с помощью команды `quit`.
 
+Также проверяем свитчи и компьютеры.
+
 <img width="601" height="203" alt="image_2025-12-05_21-53-02" src="https://github.com/user-attachments/assets/64522755-3b9e-425e-b485-044096a185d4" />
 
 
