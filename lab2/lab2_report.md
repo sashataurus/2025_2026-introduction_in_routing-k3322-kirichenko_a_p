@@ -23,7 +23,7 @@
 
 ## Схема сети
 
-<img width="898" height="755" alt="image" src="https://github.com/user-attachments/assets/9fac3512-17ef-4097-bac2-dbc73998725d" />
+<img width="908" height="780" alt="image" src="https://github.com/user-attachments/assets/b15882bc-6b56-4640-87d5-0c8272fa1178" />
 
 ## Сеть управления
 
