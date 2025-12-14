@@ -142,7 +142,7 @@ udhcpc -i eth1
 
 ### Роутеры R01
 
-Заходим с помощью команды `ssh sasha@clab-lab2-R01.MSK`
+Заходим с помощью команды `ssh sasha@clab-lab2-R01.MSK`.
 
 <img width="960" height="628" alt="image" src="https://github.com/user-attachments/assets/654b9079-a38b-49cd-a9a3-1fea0d385308" />
 
