@@ -191,13 +191,13 @@ udhcpc -i eth1
 
 Заходим с помощью команды `ssh sasha@clab-lab3-R01.NY`
 
-*OSPF*
+*OSPF:*
 
-*MPLS*
+*MPLS:*
 
 С фильтрацией:
 
-*VPLS*
+*VPLS:*
 
 Выходим с помощью команды `quit`.
 
@@ -206,6 +206,8 @@ udhcpc -i eth1
 Заходим с помощью команды `docker exec -it clab-lab3-PC1 sh`.
 
 Выходим с помощью команды `exit`.
+
+Перед выполнением следующей лабораторной нужно прописать команду `clab destroy -t lab3.clab.yaml`.
 
 ## Вывод
 
