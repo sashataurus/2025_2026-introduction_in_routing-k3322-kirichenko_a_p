@@ -86,12 +86,6 @@ in
 
 # chapter 2
 
-## Сеть управления
-
-Затем деплоим с помощью команды `clab deploy -t lab4-2.clab.yaml`:
-
-<img width="884" height="654" alt="image" src="https://github.com/user-attachments/assets/16bc19b2-cf21-4e71-a2f4-cf6c904c38ba" />
-
 VPLS
 
 router dhcp
