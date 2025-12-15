@@ -1,6 +1,26 @@
+- University: [ITMO University](https://itmo.ru/ru/)
+- Faculty: [FICT](https://fict.itmo.ru)
+- Course: [Introduction in routing](https://github.com/itmo-ict-faculty/introduction-in-routing)
+- Year: 2025/2026
+- Group: K3322
+- Author: Kirichenko Aleksandra Petrovna
+- Lab: Lab4
+- Date of create: 14.12.2025
+- Date of finished: 15.12.2025
 
+# Задание
+
+# Схема сети
+
+# chapter 1
+
+## Сеть управления
+
+Затем деплоим с помощью команды `clab deploy -t lab4-1.clab.yaml`:
 
 <img width="972" height="656" alt="image" src="https://github.com/user-attachments/assets/11121411-e3a6-4396-b27f-23b4d6eb3b2f" />
+
+Строим граф топологии с помощью команды `clab graph -t lab4-1.clab.yaml`:
 
 <img width="837" height="604" alt="image" src="https://github.com/user-attachments/assets/6a98cc67-626a-4b37-aacf-ce6796a4b933" />
 
@@ -32,7 +52,7 @@ MPLS
 
 <img width="997" height="507" alt="image" src="https://github.com/user-attachments/assets/38ea0853-9538-4a84-9f45-b0619729c100" />
 
-BGP
+iBGP
 
 <img width="1002" height="687" alt="image" src="https://github.com/user-attachments/assets/7c080bcd-4a06-442b-9569-30b827a4687e" />
 
@@ -64,3 +84,26 @@ in
 
 <img width="789" height="287" alt="image" src="https://github.com/user-attachments/assets/c2f3ed66-82b2-4cf0-9605-dd67ee9b6664" />
 
+# chapter 2
+
+## Сеть управления
+
+Затем деплоим с помощью команды `clab deploy -t lab4-2.clab.yaml`:
+
+<img width="884" height="654" alt="image" src="https://github.com/user-attachments/assets/16bc19b2-cf21-4e71-a2f4-cf6c904c38ba" />
+
+VPLS
+
+router dhcp
+
+<img width="860" height="140" alt="image" src="https://github.com/user-attachments/assets/a565352a-c87f-4e09-8e31-fb48aec785cd" />
+
+pc
+
+<img width="596" height="422" alt="image" src="https://github.com/user-attachments/assets/4f4ffdf8-ce1f-4de2-8575-eaef57a10876" />
+
+<img width="596" height="422" alt="image" src="https://github.com/user-attachments/assets/d8914aed-8859-46aa-8c93-5f2b0b6ce9c8" />
+
+<img width="596" height="422" alt="image" src="https://github.com/user-attachments/assets/800a7f7e-1b13-44e2-8681-43819cd8249f" />
+
+done
