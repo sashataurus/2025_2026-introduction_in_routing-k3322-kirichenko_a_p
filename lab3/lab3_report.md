@@ -95,17 +95,17 @@ topology:
 
 Затем деплоим с помощью команды `clab deploy -t lab3.clab.yaml`:
 
-cкрин
+<img width="975" height="596" alt="image" src="https://github.com/user-attachments/assets/cbfe02da-dabc-4b99-9a25-50b1d1cdc37f" />
 
 Строим граф топологии с помощью команды `clab graph -t lab3.clab.yaml`:
 
-скрин
+<img width="1147" height="514" alt="image" src="https://github.com/user-attachments/assets/8a28310c-57b4-4923-9888-57551f668b47" />
 
 ## Написание конфигов
 
 ### Роутеры R01
 
-*OSFP:*
+*OSPF:*
 
 Используем loopback, потому что это интерфейс с IP-адресом, который сам по себе никогда не упадёт без вмешательства. Указываем в router-id адрес loopback интерфейса. Нужна только 1 зона для всех устройств - пишем её имя и все физические подключения.
 
@@ -175,7 +175,7 @@ add interface=ether2 bridge=vpn
 add interface=SGIPC bridge=vpn
 ```
 
-### Компьютеры PC
+### Компьютеры
 
 IP-адреса выдаются компьютерам через DHCP, но в Containerlab у них выставляется дефолтный маршрут от сети управления в yaml-конфиге, из-за чего попытки послать запрос на передаются на роутер моего провайдера, где этот запрос теряется. Поэтому необходимо удалить этот маршрут.
 
@@ -191,19 +191,49 @@ udhcpc -i eth1
 
 Заходим с помощью команды `ssh sasha@clab-lab3-R01.NY`
 
-*OSPF:*
+### *OSPF:*
 
-*MPLS:*
+<img width="721" height="559" alt="image" src="https://github.com/user-attachments/assets/1e9dc572-f655-45ea-a150-03fcb62740c3" />
 
-С фильтрацией:
+<img width="721" height="535" alt="image" src="https://github.com/user-attachments/assets/22127a87-fb15-443b-b0b2-635f11f0ca37" />
 
-*VPLS:*
+<img width="721" height="535" alt="image" src="https://github.com/user-attachments/assets/47c72ee9-57e2-4195-8454-78e46623ae07" />
+
+<img width="721" height="535" alt="image" src="https://github.com/user-attachments/assets/a951db70-6ab0-471c-bd97-74a50ddf003e" />
+
+<img width="721" height="535" alt="image" src="https://github.com/user-attachments/assets/13ac9bf8-3467-4c12-ba31-bf358f345f87" />
+
+<img width="721" height="556" alt="image" src="https://github.com/user-attachments/assets/487bec0d-b232-40e0-91a1-9e0445ccbfc9" />
+
+### *MPLS:*
+
+<img width="965" height="625" alt="image" src="https://github.com/user-attachments/assets/2283a9ad-1505-47c4-80a3-689ccbfdb7d7" />
+
+<img width="957" height="500" alt="image" src="https://github.com/user-attachments/assets/25cae11b-1014-495f-9ba9-b35c86271fa1" />
+
+<img width="957" height="654" alt="image" src="https://github.com/user-attachments/assets/a32af9b6-1fd4-433b-bf82-f4dd12076e3a" />
+
+<img width="957" height="565" alt="image" src="https://github.com/user-attachments/assets/1f9b8d4d-a47e-45b6-a584-870b08c0ae60" />
+
+<img width="957" height="586" alt="image" src="https://github.com/user-attachments/assets/b25a89a9-db83-4eda-8316-e78ea929e69d" />
+
+<img width="957" height="586" alt="image" src="https://github.com/user-attachments/assets/b8a89eb0-77a0-4ebb-acb0-3686b7a72242" />
+
+### *VPLS:*
+
+<img width="486" height="97" alt="image" src="https://github.com/user-attachments/assets/a1dc7a96-91fc-4e99-84ed-af0aa4fe80d8" />
+
+<img width="482" height="103" alt="image" src="https://github.com/user-attachments/assets/2d8d2acf-fd2c-4662-b5e1-f4092f72fcf1" />
 
 Выходим с помощью команды `quit`.
 
-### Компьютеры PC
+### Компьютеры
 
 Заходим с помощью команды `docker exec -it clab-lab3-PC1 sh`.
+
+<img width="582" height="230" alt="image" src="https://github.com/user-attachments/assets/83946bd4-75f7-44d6-9dcb-fb5bcec24df9" />
+
+<img width="604" height="230" alt="image" src="https://github.com/user-attachments/assets/c814ef1d-434b-4056-be09-713feb470726" />
 
 Выходим с помощью команды `exit`.
 
