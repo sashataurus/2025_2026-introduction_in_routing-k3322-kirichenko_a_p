@@ -218,7 +218,7 @@ udhcpc -i eth1
 
 ### Роутеры R01
 
-Заходим с помощью команды `ssh sasha@clab-lab3-R01.HKI`
+Заходим с помощью команды `ssh sasha@clab-lab4-1-R01.HKI`
 
 ### *OSPF:*
 
@@ -325,7 +325,7 @@ add address=10.100.1.0/24 gateway=10.100.1.1
 
 ### Роутеры R01
 
-Заходим с помощью команды `ssh sasha@clab-lab3-R01.SPB`.
+Заходим с помощью команды `ssh sasha@clab-lab4-2-R01.SPB`.
 
 ### *VPLS:*
 
