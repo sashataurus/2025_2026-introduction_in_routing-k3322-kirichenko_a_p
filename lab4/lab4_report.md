@@ -38,7 +38,7 @@
 
 # Схема сети
 
-<img width="1461" height="899" alt="image" src="https://github.com/user-attachments/assets/00a1b9af-db75-4cbe-b785-4e0c64763f08" />
+<img width="1310" height="724" alt="image" src="https://github.com/user-attachments/assets/bee4a30d-214e-4176-8230-d1fcee67c173" />
 
 # Часть 1
 
